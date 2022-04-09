@@ -1,4 +1,3 @@
-let gas = 0
 basic.clearScreen()
 lcd1602.setAddress(
 lcd1602.I2C_ADDR.addr1
@@ -26,10 +25,4 @@ basic.forever(function () {
     1
     )
     basic.pause(1000)
-})
-basic.forever(function () {
-    gas = pins.analogReadPin(AnalogPin.P1)
-    if (gas > 400) {
-        music.playTone(262, music.beat(BeatFraction.Whole))
-    }
 })
