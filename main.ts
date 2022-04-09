@@ -1,3 +1,4 @@
+let gas = 0
 basic.clearScreen()
 lcd1602.setAddress(
 lcd1602.I2C_ADDR.addr1
@@ -9,14 +10,14 @@ lcd1602.putString(
 )
 lcd1602.putString(
 "ALC",
-7,
+9,
 0
 )
 let val = 0
 basic.forever(function () {
     lcd1602.putNumber(
     pins.analogReadPin(AnalogPin.P1),
-    4,
+    3,
     1
     )
     lcd1602.putNumber(
@@ -27,9 +28,8 @@ basic.forever(function () {
     basic.pause(1000)
 })
 basic.forever(function () {
-    if (input.pinIsPressed(TouchPin.P0)) {
-        basic.showIcon(IconNames.Heart)
-    } else {
-        basic.showIcon(IconNames.SmallHeart)
+    gas = pins.analogReadPin(AnalogPin.P1)
+    if (gas > 400) {
+        music.playTone(262, music.beat(BeatFraction.Whole))
     }
 })
